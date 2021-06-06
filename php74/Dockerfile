@@ -58,7 +58,7 @@ RUN docker-php-ext-install bcmath bz2 pdo_mysql zip exif
 RUN docker-php-ext-configure gd --enable-gd --with-jpeg
 RUN docker-php-ext-install gd
 
-COPY ./nginx.conf /etc/nginx/conf.d/app.conf
+ADD nginx.conf /etc/nginx/conf.d/app.conf
 
 EXPOSE 80
 
