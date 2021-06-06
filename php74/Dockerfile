@@ -37,6 +37,9 @@ RUN apt-get update --fix-missing \
 # Install composer
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
+# Install Nginx
+RUN apt-get -y --no-install-recommends install nginx
+
 # Install node/npm
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
 RUN apt-get install -y nodejs
@@ -54,5 +57,12 @@ RUN docker-php-ext-install bcmath bz2 pdo_mysql zip exif
 
 RUN docker-php-ext-configure gd --enable-gd --with-jpeg
 RUN docker-php-ext-install gd
+
+COPY nginx.conf /etc/nginx/conf.d/app.conf
+
+ADD boot.sh /boot.sh
+RUN chmod 755 /boot.sh
+
+CMD /boot.sh
 
 EXPOSE 80
