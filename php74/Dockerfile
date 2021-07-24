@@ -32,7 +32,7 @@ RUN apt-get update --fix-missing \
     libfreetype6-dev \
     python2 \
     nginx \
-    apt-get -y autoremove \
+    && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
    
